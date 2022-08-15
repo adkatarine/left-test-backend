@@ -24,12 +24,12 @@ class ProductService {
         return $this->productRepository->update($id, $data);
     }
 
-    public function findAll(string $relation = '') {
-        return $this->productRepository->findAll($relation);
+    public function findAll() {
+        return $this->productRepository->findAll(relation: 'category');
     }
 
-    public function findById(int $id, string $relation = '') {
-        return $this->productRepository->findById($id, $relation);
+    public function findById(int $id) {
+        return $this->productRepository->findById($id, relation: 'category');
     }
 
     public function delete(int $id) {

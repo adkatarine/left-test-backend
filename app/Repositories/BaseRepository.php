@@ -23,10 +23,16 @@ class BaseRepository implements BaseRepositoryInterface {
     }
 
     public function findAll(string $relation = '') {
+        if(!empty($relation)){
+            $this->model->with($relation)->get();
+        }
         return $this->model->get();
     }
 
     public function findById(int $id, string $relation = '') {
+        if(!empty($relation)){
+            return $this->model->with($relation)->findOrFail($id);
+        }
         return $this->model->findOrFail($id);
     }
 
