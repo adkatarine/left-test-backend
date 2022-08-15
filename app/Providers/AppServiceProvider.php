@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\BaseRepositoryInterface;
+use App\Repositories\BaseRepository;
+use App\Models\Category;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +16,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(BaseRepositoryInterface::class, BaseRepository::class);
+
+        $this->app->bind(BaseRepositoryInterface::class, function () {
+            return new BaseRepository(new Category());
+        });
     }
 
     /**
