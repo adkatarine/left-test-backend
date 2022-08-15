@@ -57,7 +57,10 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, int $id)
     {
-        dd($request->all());
+        if($request->has('_method')) {
+            $request->request->remove('_method');
+        }
+
         $product = $this->product->update($id, $request->all());
         return response()->json($product, 200);
     }
