@@ -13,11 +13,11 @@ class CategoryService {
     }
 
     public function create(array $data) {
-        $this->categoryRepository->create($data);
+        return $this->categoryRepository->create($data);
     }
 
     public function update(int $id, array $data) {
-        $this->categoryRepository->update($id, $data);
+        return $this->categoryRepository->update($id, $data);
     }
 
     public function findAll(string $relation = '') {
@@ -29,6 +29,6 @@ class CategoryService {
     }
 
     public function delete(int $id) {
-        $this->categoryRepository->delete($id);
+        return $this->categoryRepository->delete($id);
     }
 }
