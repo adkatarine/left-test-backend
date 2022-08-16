@@ -21,10 +21,7 @@ return new class extends Migration
             $table->date('date_birth')->nullable();
             $table->string('cpf', 11)->nullable();
             $table->string('cnpj', 14)->nullable();
-            $table->unsignedBigInteger('address_id');
             $table->timestamps();
-
-            $table->foreign('address_id')->references('id')->on('addresses');
         });
     }
 

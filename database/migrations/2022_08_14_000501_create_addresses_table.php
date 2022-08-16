@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('client_id');
             $table->string('cep', 8);
             $table->string('state', 50);
             $table->string('city', 50);
@@ -23,6 +24,8 @@ return new class extends Migration
             $table->string('number', 10)->nullable();
             $table->string('complement', 50)->nullable();
             $table->timestamps();
+
+            $table->foreign('client_id')->references('id')->on('clients');
         });
     }
 
