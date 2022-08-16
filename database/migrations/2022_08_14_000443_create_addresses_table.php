@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->string('cep', 8)->nullable();
-            $table->string('state', 50)->nullable();
-            $table->string('city', 50)->nullable();
-            $table->string('neighborhood', 50)->nullable();
-            $table->string('street', 50)->nullable();
-            $table->string('number', 10);
+            $table->string('cep', 8);
+            $table->string('state', 50);
+            $table->string('city', 50);
+            $table->string('neighborhood', 50);
+            $table->string('street', 50);
+            $table->string('number', 10)->nullable();
             $table->string('complement', 50)->nullable();
             $table->timestamps();
         });

@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50)->nullable();
-            $table->string('email', 50)->unique()->nullable();
-            $table->string('phone_number', 15);
-            $table->date('date_birth');
-            $table->string('cpf', 11);
-            $table->string('cnpj', 14);
+            $table->string('name', 50);
+            $table->string('email', 50)->unique();
+            $table->string('phone_number', 15)->nullable();
+            $table->date('date_birth')->nullable();
+            $table->string('cpf', 11)->nullable();
+            $table->string('cnpj', 14)->nullable();
             $table->unsignedBigInteger('address_id');
             $table->timestamps();
 
