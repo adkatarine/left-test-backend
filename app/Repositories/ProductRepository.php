@@ -8,6 +8,7 @@ use App\Repositories\Contracts\ProductRepositoryInterface;
 class ProductRepository implements ProductRepositoryInterface {
 
     protected $product;
+    private $relation = 'category';
 
     public function __construct(Product $product) {
         $this->product = $product;
@@ -21,12 +22,12 @@ class ProductRepository implements ProductRepositoryInterface {
         return $this->product->findOrFail($id)->update($data);
     }
 
-    public function findAll(string $relation) {
-        return $this->product->with($relation)->get();
+    public function findAll() {
+        return $this->product->with($this->relation)->get();
     }
 
-    public function findById(int $id, string $relation) {
-        return $this->product->with($relation)->findOrFail($id);
+    public function findById(int $id) {
+        return $this->product->with($this->relation)->findOrFail($id);
     }
 
     public function delete(int $id) {
