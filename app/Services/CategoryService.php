@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Contracts\CategoryRepositoryInterface;
+use App\Exceptions\NotFoundException;
 
 class CategoryService {
 
@@ -17,6 +18,12 @@ class CategoryService {
     }
 
     public function update(int $id, array $data) {
+        $category = $this->findById($id);
+
+        if(!$category) {
+            throw new NotFoundException('Categoria');
+        }
+
         return $this->categoryRepository->update($id, $data);
     }
 
@@ -25,10 +32,22 @@ class CategoryService {
     }
 
     public function findById(int $id) {
-        return $this->categoryRepository->findById($id);
+        $category = $this->categoryRepository->findById($id);
+
+        if(!$category) {
+            throw new NotFoundException('Categoria');
+        }
+
+        return $category;
     }
 
     public function delete(int $id) {
+        $category = $this->findById($id);
+
+        if(!$category) {
+            throw new NotFoundException('Categoria');
+        }
+
         return $this->categoryRepository->delete($id);
     }
 }

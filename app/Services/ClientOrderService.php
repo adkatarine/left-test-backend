@@ -5,7 +5,8 @@ namespace App\Services;
 use App\Repositories\Contracts\ClientOrderRepositoryInterface;
 use App\Repositories\Contracts\ClientRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
-
+use App\Exceptions\NotFoundException;
+use App\Exceptions\QuantityInsuficienteException;
 class ClientOrderService {
 
     private $clientOrderRepository;
@@ -21,14 +22,17 @@ class ClientOrderService {
         $client = $this->clientRepository->findById($data['client_id']);
         $product = $this->productRepository->findById($data['product_id']);
 
-        if($client && $product) {
-            if($product->quantity_stock >= $data['quantity']){
-                $product->quantity_stock = $product->quantity_stock - $data['quantity'];
-                $this->productRepository->update($product->id, ['quantity_stock' => $product->quantity_stock]);
-                return $this->clientOrderRepository->create($data);
-            }
+        if(!$client || !$product) {
+            throw new NotFoundException('Cliente e|ou Produto');
         }
-        #TODO: tratar erro
+
+        if($product->quantity_stock < $data['quantity']){
+            throw new QuantityInsuficienteException();
+        }
+
+        $product->quantity_stock = $product->quantity_stock - $data['quantity'];
+        $this->productRepository->update($product->id, ['quantity_stock' => $product->quantity_stock]);
+        return $this->clientOrderRepository->create($data);
     }
 
     public function update(int $id, array $data) {
@@ -36,15 +40,19 @@ class ClientOrderService {
         $client = $this->clientRepository->findById($data['client_id']);
         $product = $this->productRepository->findById($data['product_id']);
 
-        if($client && $product) {
-            $product->quantity_stock = $product->quantity_stock + $clientOrder->quantity;
-            if($product->quantity_stock >= $data['quantity']){
-                $product->quantity_stock = $product->quantity_stock - $data['quantity'];
-                $this->productRepository->update($product->id, ['quantity_stock' => $product->quantity_stock]);
-                return $this->clientOrderRepository->update($id, $data);
-            }
+        if(!$client || !$product || !$clientOrder) {
+            throw new NotFoundException('Cliente, Produto e|ou Pedido');
         }
-        #TODO: tratar erro
+
+        $product->quantity_stock = $product->quantity_stock + $clientOrder->quantity;
+
+        if($product->quantity_stock < $data['quantity']){
+            throw new QuantityInsuficienteException();
+        }
+
+        $product->quantity_stock = $product->quantity_stock - $data['quantity'];
+        $this->productRepository->update($product->id, ['quantity_stock' => $product->quantity_stock]);
+        return $this->clientOrderRepository->update($id, $data);
     }
 
     public function findAll() {
@@ -52,11 +60,22 @@ class ClientOrderService {
     }
 
     public function findById(int $id) {
-        return $this->clientOrderRepository->findById($id);
+        $clientOrder = $this->clientOrderRepository->findById($id);
+
+        if(!$clientOrder) {
+            throw new NotFoundException('Pedido');
+        }
+
+        return $clientOrder;
     }
 
     public function delete(int $id) {
         $clientOrder = $this->findById($id);
+
+        if(!$clientOrder) {
+            throw new NotFoundException('Pedido');
+        }
+
         $product = $this->productRepository->findById($clientOrder->product_id);
 
         $product->quantity_stock = $product->quantity_stock + $clientOrder->quantity;

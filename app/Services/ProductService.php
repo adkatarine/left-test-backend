@@ -4,11 +4,11 @@ namespace App\Services;
 
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use Illuminate\Support\Facades\Storage;
+use App\Exceptions\NotFoundException;
 
 class ProductService {
 
     private $productRepository;
-    private $relation = 'category';
 
     public function __construct(ProductRepositoryInterface $productRepository) {
         $this->productRepository = $productRepository;
@@ -25,6 +25,10 @@ class ProductService {
     public function update(int $id, array $data) {
         $product = $this->findById($id);
 
+        if(!$product) {
+            throw new NotFoundException('Produto');
+        }
+
         if($product->image && array_key_exists('image', $data)) {
             Storage::disk('public')->delete($product->image);
         }
@@ -38,20 +42,27 @@ class ProductService {
     }
 
     public function findAll() {
-        return $this->productRepository->findAll($this->relation);
+        return $this->productRepository->findAll();
     }
 
     public function findById(int $id) {
-        return $this->productRepository->findById($id, $this->relation);
+        $product = $this->productRepository->findById($id);
+
+        if(!$product) {
+            throw new NotFoundException('Produto');
+        }
+
+        return $product;
     }
 
     public function delete(int $id) {
         $product = $this->findById($id);
 
+        if(!$product) {
+            throw new NotFoundException('Produto');
+        }
+
         Storage::disk('public')->delete($product->image);
-        // if($product->image) {
-        //     Storage::disk('public')->delete($product->image);
-        // }
 
         return $this->productRepository->delete($id);
     }

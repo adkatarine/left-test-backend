@@ -3,11 +3,11 @@
 namespace App\Services;
 
 use App\Repositories\Contracts\ClientRepositoryInterface;
+use App\Exceptions\NotFoundException;
 
 class ClientService {
 
     private $clientRepository;
-    private $relation = 'addresses';
 
     public function __construct(ClientRepositoryInterface $clientRepository) {
         $this->clientRepository = $clientRepository;
@@ -18,18 +18,36 @@ class ClientService {
     }
 
     public function update(int $id, array $data) {
+        $client = $this->findById($id);
+
+        if(!$client) {
+            throw new NotFoundException('Cliente');
+        }
+
         return $this->clientRepository->update($id, $data);
     }
 
     public function findAll() {
-        return $this->clientRepository->findAll($this->relation);
+        return $this->clientRepository->findAll();
     }
 
     public function findById(int $id) {
-        return $this->clientRepository->findById($id, $this->relation);
+        $client = $this->clientRepository->findById($id);
+
+        if(!$client) {
+            throw new NotFoundException('Cliente');
+        }
+
+        return $client;
     }
 
     public function delete(int $id) {
+        $client = $this->findById($id);
+
+        if(!$client) {
+            throw new NotFoundException('Cliente');
+        }
+
         return $this->clientRepository->delete($id);
     }
 }
