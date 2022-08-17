@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Repositories\API\BrasilApi as ZipCodeAPI;
 use App\Utils\FormatData;
 use App\Repositories\Contracts\AddressRepositoryInterface;
-use Exception;
 
 class AddressService {
 
