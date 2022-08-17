@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ClientOrder;
+use App\Services\ClientOrderService;
 use Illuminate\Http\Request;
 
 class ClientOrderController extends Controller
 {
+
+    public function __construct(ClientOrderService $clientOrder) {
+        $this->clientOrder = $clientOrder;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +19,8 @@ class ClientOrderController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $clientOrder = $this->clientOrder->findAll();
+        return response()->json($clientOrder, 200);
     }
 
     /**
@@ -35,7 +31,8 @@ class ClientOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $clientOrder = $this->clientOrder->create($request->all());
+        return response()->json($clientOrder, 201);
     }
 
     /**
@@ -44,20 +41,10 @@ class ClientOrderController extends Controller
      * @param  \App\Models\ClientOrder  $clientOrder
      * @return \Illuminate\Http\Response
      */
-    public function show(ClientOrder $clientOrder)
+    public function show(int $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ClientOrder  $clientOrder
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ClientOrder $clientOrder)
-    {
-        //
+        $clientOrder = $this->clientOrder->findById($id);
+        return response()->json($clientOrder, 200);
     }
 
     /**
@@ -67,9 +54,10 @@ class ClientOrderController extends Controller
      * @param  \App\Models\ClientOrder  $clientOrder
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ClientOrder $clientOrder)
+    public function update(Request $request, int $id)
     {
-        //
+        $clientOrder = $this->clientOrder->update($id, $request->all());
+        return response()->json($clientOrder, 200);
     }
 
     /**
@@ -78,8 +66,9 @@ class ClientOrderController extends Controller
      * @param  \App\Models\ClientOrder  $clientOrder
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ClientOrder $clientOrder)
+    public function destroy(int $id)
     {
-        //
+        $clientOrder = $this->clientOrder->delete($id);
+        return response()->json($clientOrder, 200);
     }
 }
