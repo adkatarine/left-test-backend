@@ -18,7 +18,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     public function update(int $id, array $data) {
-        return $this->category->findOrFail($id)->update($data);
+        return $this->category->find($id)->update($data);
     }
 
     public function findAll() {
@@ -26,10 +26,10 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     public function findById(int $id) {
-        return $this->category->findOrFail($id);
+        return $this->category->find($id);
     }
 
     public function delete(int $id) {
-        return $this->category->findOrFail($id)->destroy($id);
+        return $this->category->find($id)->destroy($id);
     }
 }

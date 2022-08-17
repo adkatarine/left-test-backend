@@ -19,7 +19,7 @@ class ProductRepository implements ProductRepositoryInterface {
     }
 
     public function update(int $id, array $data) {
-        return $this->product->findOrFail($id)->update($data);
+        return $this->product->find($id)->update($data);
     }
 
     public function findAll() {
@@ -27,10 +27,10 @@ class ProductRepository implements ProductRepositoryInterface {
     }
 
     public function findById(int $id) {
-        return $this->product->with($this->relation)->findOrFail($id);
+        return $this->product->with($this->relation)->find($id);
     }
 
     public function delete(int $id) {
-        return $this->product->findOrFail($id)->destroy($id);
+        return $this->product->find($id)->destroy($id);
     }
 }

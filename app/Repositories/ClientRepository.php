@@ -19,7 +19,7 @@ class ClientRepository implements ClientRepositoryInterface
     }
 
     public function update(int $id, array $data) {
-        return $this->client->findOrFail($id)->update($data);
+        return $this->client->find($id)->update($data);
     }
 
     public function findAll() {
@@ -27,10 +27,10 @@ class ClientRepository implements ClientRepositoryInterface
     }
 
     public function findById(int $id) {
-        return $this->client->with($this->relation)->findOrFail($id);
+        return $this->client->with($this->relation)->find($id);
     }
 
     public function delete(int $id) {
-        return $this->client->findOrFail($id)->destroy($id);
+        return $this->client->find($id)->destroy($id);
     }
 }

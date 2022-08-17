@@ -19,7 +19,7 @@ class ClientOrderRepository implements ClientOrderRepositoryInterface
     }
 
     public function update(int $id, array $data) {
-        return $this->clientOrder->findOrFail($id)->update($data);
+        return $this->clientOrder->find($id)->update($data);
     }
 
     public function findAll() {
@@ -27,10 +27,10 @@ class ClientOrderRepository implements ClientOrderRepositoryInterface
     }
 
     public function findById(int $id) {
-        return $this->clientOrder->with($this->relation)->findOrFail($id);
+        return $this->clientOrder->with($this->relation)->find($id);
     }
 
     public function delete(int $id) {
-        return $this->clientOrder->findOrFail($id)->destroy($id);
+        return $this->clientOrder->find($id)->destroy($id);
     }
 }

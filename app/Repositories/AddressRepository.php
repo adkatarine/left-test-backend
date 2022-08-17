@@ -18,7 +18,7 @@ class AddressRepository implements AddressRepositoryInterface
     }
 
     public function update(int $id, array $data) {
-        return $this->address->findOrFail($id)->update($data);
+        return $this->address->find($id)->update($data);
     }
 
     public function findAll() {
@@ -26,10 +26,10 @@ class AddressRepository implements AddressRepositoryInterface
     }
 
     public function findById(int $id) {
-        return $this->address->findOrFail($id);
+        return $this->address->find($id);
     }
 
     public function delete(int $id) {
-        return $this->address->findOrFail($id)->destroy($id);
+        return $this->address->find($id)->destroy($id);
     }
 }
