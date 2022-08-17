@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use Illuminate\Support\Facades\Storage;
 use App\Exceptions\NotFoundException;
+use App\Exceptions\IntegrityConstraintViolationException;
 
 class ProductService {
 
@@ -62,8 +63,14 @@ class ProductService {
             throw new NotFoundException('Produto');
         }
 
+        try {
+            $product = $this->productRepository->delete($id);
+        } catch (\Illuminate\Database\QueryException $e) {
+            throw new IntegrityConstraintViolationException('produto');
+        }
+
         Storage::disk('public')->delete($product->image);
 
-        return $this->productRepository->delete($id);
+        return $product;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Exceptions\NotFoundException;
+use App\Exceptions\IntegrityConstraintViolationException;
 
 class CategoryService {
 
@@ -48,6 +49,12 @@ class CategoryService {
             throw new NotFoundException('Categoria');
         }
 
-        return $this->categoryRepository->delete($id);
+        try {
+            $category = $this->categoryRepository->delete($id);
+        } catch (\Illuminate\Database\QueryException $e) {
+            throw new IntegrityConstraintViolationException('categoria');
+        }
+
+        return $category;
     }
 }

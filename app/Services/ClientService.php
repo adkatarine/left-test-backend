@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\Contracts\ClientRepositoryInterface;
 use App\Exceptions\NotFoundException;
+use App\Exceptions\IntegrityConstraintViolationException;
 
 class ClientService {
 
@@ -48,6 +49,12 @@ class ClientService {
             throw new NotFoundException('Cliente');
         }
 
-        return $this->clientRepository->delete($id);
+        try {
+            $user = $this->clientRepository->delete($id);
+        } catch (\Illuminate\Database\QueryException $e) {
+            throw new IntegrityConstraintViolationException('cliente');
+        }
+
+        return $user;
     }
 }
