@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Repositories\Contracts\BaseRepositoryInterface;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
 
 class CategoryService {
 
     private $categoryRepository;
 
-    public function __construct(BaseRepositoryInterface $categoryRepository) {
+    public function __construct(CategoryRepositoryInterface $categoryRepository) {
         $this->categoryRepository = $categoryRepository;
     }
 
@@ -20,12 +20,12 @@ class CategoryService {
         return $this->categoryRepository->update($id, $data);
     }
 
-    public function findAll(string $relation = '') {
-        return $this->categoryRepository->findAll($relation);
+    public function findAll() {
+        return $this->categoryRepository->findAll();
     }
 
-    public function findById(int $id, string $relation = '') {
-        return $this->categoryRepository->findById($id, $relation);
+    public function findById(int $id) {
+        return $this->categoryRepository->findById($id);
     }
 
     public function delete(int $id) {

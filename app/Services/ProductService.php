@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Repositories\Contracts\BaseRepositoryInterface;
+use App\Repositories\Contracts\ProductRepositoryInterface;
 use Illuminate\Support\Facades\Storage;
 
 class ProductService {
@@ -10,7 +10,7 @@ class ProductService {
     private $productRepository;
     private $relation = 'category';
 
-    public function __construct(BaseRepositoryInterface $productRepository) {
+    public function __construct(ProductRepositoryInterface $productRepository) {
         $this->productRepository = $productRepository;
     }
 
