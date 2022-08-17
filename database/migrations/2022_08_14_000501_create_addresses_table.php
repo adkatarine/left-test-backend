@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('complement', 50)->nullable();
             $table->timestamps();
 
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
         });
     }
 
