@@ -14,4 +14,8 @@ class Client extends Model
     public function addresses() {
         return $this->hasMany(Address::class);
     }
+
+    public function client_orders() {
+        return $this->hasMany(ClientOrder::class);
+    }
 }
