@@ -27,7 +27,7 @@ class ClientOrderRepository implements ClientOrderRepositoryInterface
     }
 
     public function findById(int $id) {
-        return $this->clientOrder->with($$this->relation)->findOrFail($id);
+        return $this->clientOrder->with($this->relation)->findOrFail($id);
     }
 
     public function delete(int $id) {
