@@ -21,18 +21,12 @@ class ClientRepository implements ClientRepositoryInterface
         return $this->client->findOrFail($id)->update($data);
     }
 
-    public function findAll(string $relation = '') {
-        if(!empty($relation)){
-            $this->client->with($relation)->get();
-        }
-        return $this->client->get();
+    public function findAll(string $relation) {
+        return $this->client->with($relation)->get();
     }
 
-    public function findById(int $id, string $relation = '') {
-        if(!empty($relation)){
-            return $this->client->with($relation)->findOrFail($id);
-        }
-        return $this->client->findOrFail($id);
+    public function findById(int $id, string $relation) {
+        return $this->client->with($relation)->findOrFail($id);
     }
 
     public function delete(int $id) {

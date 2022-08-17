@@ -7,6 +7,7 @@ use App\Repositories\Contracts\ClientRepositoryInterface;
 class ClientService {
 
     private $clientRepository;
+    private $relation = 'addresses';
 
     public function __construct(ClientRepositoryInterface $clientRepository) {
         $this->clientRepository = $clientRepository;
@@ -20,12 +21,12 @@ class ClientService {
         return $this->clientRepository->update($id, $data);
     }
 
-    public function findAll(string $relation = '') {
-        return $this->clientRepository->findAll($relation);
+    public function findAll() {
+        return $this->clientRepository->findAll($this->relation);
     }
 
-    public function findById(int $id, string $relation = '') {
-        return $this->clientRepository->findById($id, $relation);
+    public function findById(int $id) {
+        return $this->clientRepository->findById($id, $this->relation);
     }
 
     public function delete(int $id) {
