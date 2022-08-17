@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Services\ClientService;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+
+    public function __construct(ClientService $client) {
+        $this->client = $client;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +19,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $client = $this->client->findAll();
+        return response()->json($client, 200);
     }
 
     /**
@@ -35,7 +31,8 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client = $this->client->create($request->all());
+        return response()->json($client, 201);
     }
 
     /**
@@ -44,20 +41,10 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $client)
+    public function show(int $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Client $client)
-    {
-        //
+        $client = $this->client->findById($id);
+        return response()->json($client, 200);
     }
 
     /**
@@ -67,9 +54,10 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, int $id)
     {
-        //
+        $client = $this->client->update($id, $request->all());
+        return response()->json($client, 200);
     }
 
     /**
@@ -78,8 +66,9 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $client)
+    public function destroy(int $id)
     {
-        //
+        $client = $this->client->delete($id);
+        return response()->json($client, 200);
     }
 }
