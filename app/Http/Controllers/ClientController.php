@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Services\ClientService;
+use App\Services\AddressService;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
 
-    public function __construct(ClientService $client) {
+    public function __construct(ClientService $client, AddressService $address) {
         $this->client = $client;
+        $this->address = $address;
     }
 
     /**
@@ -31,7 +33,18 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->has('addresses')) {
+            $addresses = $request->get('addresses');
+            $request->request->remove('addresses');
+        }
+
         $client = $this->client->create($request->all());
+
+        foreach ($addresses as $key => $address) {
+            $address['client_id'] = $client->id;
+            $addresses[$key] = $this->address->create($address);
+        }
+
         return response()->json($client, 201);
     }
 
