@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\ClientService;
 use App\Services\AddressService;
+use App\Http\Resources\ClientCollection;
+use App\Http\Resources\ClientResource;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -21,7 +23,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $client = $this->client->findAll();
+        $client = new ClientCollection($this->client->findAll());
         return response()->json($client, 200);
     }
 
@@ -56,7 +58,7 @@ class ClientController extends Controller
      */
     public function show(int $id)
     {
-        $client = $this->client->findById($id);
+        $client = new ClientResource($this->client->findById($id));
         return response()->json($client, 200);
     }
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Services\ProductService;
+use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductResource;
 use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
@@ -19,7 +21,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = $this->product->findAll();
+        $product = new ProductCollection($this->product->findAll());
         return response()->json($product, 200);
     }
 
@@ -31,7 +33,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $product = $this->product->create($request->all());
+        $product = new ProductResource($this->product->create($request->all()));
         return response()->json($product, 201);
     }
 
@@ -43,7 +45,7 @@ class ProductController extends Controller
      */
     public function show(int $id)
     {
-        $product = $this->product->findById($id);
+        $product = new ProductResource($this->product->findById($id));
         return response()->json($product, 200);
     }
 

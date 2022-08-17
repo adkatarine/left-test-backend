@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Services\ClientOrderService;
+use App\Http\Resources\ClientOrderCollection;
+use App\Http\Resources\ClientOrderResource;
 use Illuminate\Http\Request;
 
 class ClientOrderController extends Controller
@@ -19,7 +21,7 @@ class ClientOrderController extends Controller
      */
     public function index()
     {
-        $clientOrder = $this->clientOrder->findAll();
+        $clientOrder = new ClientOrderCollection($this->clientOrder->findAll());
         return response()->json($clientOrder, 200);
     }
 
@@ -31,7 +33,7 @@ class ClientOrderController extends Controller
      */
     public function store(Request $request)
     {
-        $clientOrder = $this->clientOrder->create($request->all());
+        $clientOrder = new ClientOrderResource($this->clientOrder->create($request->all()));
         return response()->json($clientOrder, 201);
     }
 
@@ -43,7 +45,7 @@ class ClientOrderController extends Controller
      */
     public function show(int $id)
     {
-        $clientOrder = $this->clientOrder->findById($id);
+        $clientOrder = new ClientOrderResource($this->clientOrder->findById($id));
         return response()->json($clientOrder, 200);
     }
 
