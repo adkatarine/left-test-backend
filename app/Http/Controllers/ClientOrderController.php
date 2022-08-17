@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ClientProduct;
+use App\Models\ClientOrder;
 use Illuminate\Http\Request;
 
-class ClientProductController extends Controller
+class ClientOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ClientProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ClientProduct  $clientProduct
+     * @param  \App\Models\ClientOrder  $clientOrder
      * @return \Illuminate\Http\Response
      */
-    public function show(ClientProduct $clientProduct)
+    public function show(ClientOrder $clientOrder)
     {
         //
     }
@@ -52,10 +52,10 @@ class ClientProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ClientProduct  $clientProduct
+     * @param  \App\Models\ClientOrder  $clientOrder
      * @return \Illuminate\Http\Response
      */
-    public function edit(ClientProduct $clientProduct)
+    public function edit(ClientOrder $clientOrder)
     {
         //
     }
@@ -64,10 +64,10 @@ class ClientProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ClientProduct  $clientProduct
+     * @param  \App\Models\ClientOrder  $clientOrder
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ClientProduct $clientProduct)
+    public function update(Request $request, ClientOrder $clientOrder)
     {
         //
     }
@@ -75,10 +75,10 @@ class ClientProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ClientProduct  $clientProduct
+     * @param  \App\Models\ClientOrder  $clientOrder
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ClientProduct $clientProduct)
+    public function destroy(ClientOrder $clientOrder)
     {
         //
     }
