@@ -2,7 +2,10 @@
 
 namespace App\Services;
 
+use App\Repositories\API\BrasilApi as ZipCodeAPI;
+use App\Utils\FormatData;
 use App\Repositories\Contracts\AddressRepositoryInterface;
+use Exception;
 
 class AddressService {
 
@@ -13,10 +16,26 @@ class AddressService {
     }
 
     public function create(array $data) {
-        return $this->addressRepository->create($data);
+        $address = ZipCodeAPI::getAddressByZipCode($data['cep']);
+        $address = FormatData::jsonDecodeResponse($address);
+        $data['state'] = $address['state'];
+        $data['city'] = $address['city'];
+        $data['neighborhood'] = $address['neighborhood'];
+        $data['street'] = $address['street'];
+        return $this->addressRepository->create($data);;
     }
 
     public function update(int $id, array $data) {
+        $address = $this->findById($id);
+
+        if($data['cep'] !== $address->cep) {
+            $address = ZipCodeAPI::getAddressByZipCode($data['cep']);
+            $address = FormatData::jsonDecodeResponse($address);
+            $data['state'] = $address['state'];
+            $data['city'] = $address['city'];
+            $data['neighborhood'] = $address['neighborhood'];
+            $data['street'] = $address['street'];
+        }
         return $this->addressRepository->update($id, $data);
     }
 
