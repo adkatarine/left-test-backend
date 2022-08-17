@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\AddressService;
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\AddressRequest;
 
 class AddressController extends Controller
 {
@@ -26,10 +26,10 @@ class AddressController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\CategoryRequest  $request
+     * @param  \App\Http\Requests\AddressRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(AddressRequest $request)
     {
         $address = $this->address->create($request->all());
         return response()->json($address, 201);
@@ -50,11 +50,11 @@ class AddressController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\CategoryRequest  $request
+     * @param  \App\Http\Requests\AddressRequest  $request
      * @param  Integer  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, int $id)
+    public function update(AddressRequest $request, int $id)
     {
         $address = $this->address->update($id, $request->all());
         return response()->json($address, 200);
