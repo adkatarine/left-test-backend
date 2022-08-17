@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\AddressService;
-use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
 
 class AddressController extends Controller
 {
@@ -26,10 +26,10 @@ class AddressController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\CategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         $address = $this->address->create($request->all());
         return response()->json($address, 201);
@@ -38,7 +38,7 @@ class AddressController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Address  $address
+     * @param  Integer  $id
      * @return \Illuminate\Http\Response
      */
     public function show(int $id)
@@ -50,11 +50,11 @@ class AddressController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Address  $address
+     * @param  \App\Http\Requests\CategoryRequest  $request
+     * @param  Integer  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $id)
+    public function update(CategoryRequest $request, int $id)
     {
         $address = $this->address->update($id, $request->all());
         return response()->json($address, 200);
@@ -63,12 +63,12 @@ class AddressController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Address  $address
+     * @param  Integer  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id)
     {
-        $address = $this->address->delete($id);
-        return response()->json($address, 200);
+        $this->address->delete($id);
+        return response()->json('Success!', 200);
     }
 }

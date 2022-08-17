@@ -6,7 +6,7 @@ use App\Services\ClientService;
 use App\Services\AddressService;
 use App\Http\Resources\ClientCollection;
 use App\Http\Resources\ClientResource;
-use Illuminate\Http\Request;
+use App\Http\Requests\ClientRequest;
 
 class ClientController extends Controller
 {
@@ -30,10 +30,10 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ClientRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
         if($request->has('addresses')) {
             $addresses = $request->get('addresses');
@@ -53,7 +53,7 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Client  $client
+     * @param  Integer  $id
      * @return \Illuminate\Http\Response
      */
     public function show(int $id)
@@ -65,11 +65,11 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Client  $client
+     * @param  \App\Http\Requests\CategoryRequest  $request
+     * @param  Integer  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $id)
+    public function update(ClientRequest $request, int $id)
     {
         $client = $this->client->update($id, $request->all());
         return response()->json($client, 200);
@@ -78,12 +78,12 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Client  $client
+     * @param  Integer  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id)
     {
-        $client = $this->client->delete($id);
-        return response()->json($client, 200);
+        $this->client->delete($id);
+        return response()->json('Success!', 200);
     }
 }
