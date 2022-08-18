@@ -210,11 +210,15 @@ A classe estática responsável pelos dados e requisição da API BrasilAPI impl
 ## Service Container
 Este recurso foi utilizado, junto com os repositories, afim de remover as regras de negócios dos controllers e utilizar a injeção de dependência.
 
+## Cache do Laravel
+A Cache do Laravel foi utilizada na requisição das categorias no banco, considerando que é provavel que raramente categorias seriam adicionadas ou removidas sempre, tornando descessário requisitar o banco com tanta frequência.
+
 # Construído com
 
 * [Laravel](https://laravel.com) - Framework na versão 9.x para criar a API
 * [MySQL](https://www.mysql.com) - Database
 * [Service Container](https://laravel.com/docs/master/container) - Ferramenta do Laravel para realizar injeção de dependência
+* [Cache](https://laravel.com/docs/9.x/cache) - Cache do Laravel para não ser necessário consultar as categorias no banco a cada requisição
 * [validator-docs](https://github.com/geekcom/validator-docs) - Biblioteca PHP para validação de documentos do Brasil usando Laravel
 * [Brasil API](https://brasilapi.com.br/docs) - API para consulta dos endereços utilizando a versão 2 do serviço de busca por CEP
 * [Insomnia](https://insomnia.rest) - Cliente para testar a API
