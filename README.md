@@ -22,7 +22,7 @@ Teste técnico da Left de um sistema contendo as tabelas Categoria, Produto, Cli
 | ------------- | --------------------------- | -------------------------------------- |
 | GET           | `/api/product`              | Retorna todos os produtos cadastrados  |
 | GET           | `/api/product/{id}`         | Retorna um produto por Id              |
-| GET           | `/api/storage/{path-image}` | Rota para visualizar imagem cadastrada |
+| GET           | `/storage/{path-image}`     | Rota para visualizar imagem cadastrada |
 | POST          | `/api/product`              | Cadastra um novo produto               |
 | POST          | `/api/product{id}`          | Altera informações de um produto       |
 | DELETE        | `/api/product{id}`          | Deleta um produto especifico           |
@@ -30,8 +30,8 @@ Teste técnico da Left de um sistema contendo as tabelas Categoria, Produto, Cli
 
 ## Rotas Client
 
-| Método HTTP  | Endpoint                   | Descrição                                |
-| ------------ | -------------------------- | ---------------------------------------- |
+| Método HTTP  | Endpoint                   | Descrição                                 |
+| ------------ | -------------------------- | ----------------------------------------- |
 | GET          | `/api/client`              | Retorna todos os clientes cadastrados     |
 | GET          | `/api/client/{id}`         | Retorna um cliente por Id                 |
 | POST         | `/api/client`              | Cadastra um novo cliente                  |
