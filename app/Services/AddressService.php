@@ -32,6 +32,7 @@ class AddressService {
             throw new InvalidZipCodeException();
         }
 
+        // atualiza as informações do endereço consultadas através do cep
         $data['state'] = $address['state'];
         $data['city'] = $address['city'];
         $data['neighborhood'] = $address['neighborhood'];
@@ -56,6 +57,7 @@ class AddressService {
                 throw new InvalidZipCodeException();
             }
 
+            // atualiza as informações do endereço consultadas através do cep
             $data['state'] = $address['state'];
             $data['city'] = $address['city'];
             $data['neighborhood'] = $address['neighborhood'];

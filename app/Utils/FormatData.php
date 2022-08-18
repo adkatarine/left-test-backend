@@ -5,7 +5,7 @@ namespace App\Utils;
 class FormatData {
 
     /**
-     * Recebe um response e retorna ela decodificada.
+     * Receive a response and return it decoded.
      *
      * @param  $object
      * @return array

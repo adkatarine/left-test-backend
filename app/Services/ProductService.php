@@ -24,6 +24,7 @@ class ProductService {
             throw new NotFoundException('Categoria');
         }
 
+        // salva imagem localmente
         if (array_key_exists('image', $data)) {
             $image = $data["image"];
             $data["image"] = $image->store('images', 'public');
@@ -40,9 +41,11 @@ class ProductService {
         }
 
         if($product->image && array_key_exists('image', $data)) {
+            // apaga imagem salva localmente
             Storage::disk('public')->delete($product->image);
         }
 
+        // salva imagem localmente
         if (array_key_exists('image', $data)) {
             $image = $data["image"];
             $data["image"] = $image->store('images', 'public');
@@ -78,6 +81,7 @@ class ProductService {
             throw new IntegrityConstraintViolationException('produto');
         }
 
+        // apaga salva localmente
         Storage::disk('public')->delete($product->image);
 
         return $product;

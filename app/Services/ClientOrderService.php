@@ -30,6 +30,7 @@ class ClientOrderService {
             throw new QuantityInsuficienteException();
         }
 
+        // decrementa a quantidade pedida do estoque
         $product->quantity_stock = $product->quantity_stock - $data['quantity'];
         $this->productRepository->update($product->id, ['quantity_stock' => $product->quantity_stock]);
         return $this->clientOrderRepository->create($data);
@@ -44,12 +45,14 @@ class ClientOrderService {
             throw new NotFoundException('Cliente, Produto e|ou Pedido');
         }
 
+        // incremeta no estoque a quantidade pedida anteriormente e que será atualizada
         $product->quantity_stock = $product->quantity_stock + $clientOrder->quantity;
 
         if($product->quantity_stock < $data['quantity']){
             throw new QuantityInsuficienteException();
         }
 
+        // decrementa a quantidade pedida do estoque
         $product->quantity_stock = $product->quantity_stock - $data['quantity'];
         $this->productRepository->update($product->id, ['quantity_stock' => $product->quantity_stock]);
         return $this->clientOrderRepository->update($id, $data);
@@ -78,6 +81,7 @@ class ClientOrderService {
 
         $product = $this->productRepository->findById($clientOrder->product_id);
 
+        // incremeta no estoque a quantidade pedida anteriormente
         $product->quantity_stock = $product->quantity_stock + $clientOrder->quantity;
         $this->productRepository->update($product->id, ['quantity_stock' => $product->quantity_stock]);
         return $this->clientOrderRepository->delete($id);
