@@ -7,6 +7,7 @@ use App\Utils\FormatData;
 use App\Repositories\Contracts\AddressRepositoryInterface;
 use App\Repositories\Contracts\ClientRepositoryInterface;
 use App\Exceptions\NotFoundException;
+use App\Exceptions\InvalidZipCodeException;
 
 class AddressService {
 
@@ -26,6 +27,11 @@ class AddressService {
 
         $address = ZipCodeAPI::getAddressByZipCode($data['cep']);
         $address = FormatData::jsonDecodeResponse($address);
+
+        if(array_key_exists('errors', $address)) {
+            throw new InvalidZipCodeException();
+        }
+
         $data['state'] = $address['state'];
         $data['city'] = $address['city'];
         $data['neighborhood'] = $address['neighborhood'];
@@ -45,6 +51,11 @@ class AddressService {
         if($data['cep'] !== $address->cep) {
             $address = ZipCodeAPI::getAddressByZipCode($data['cep']);
             $address = FormatData::jsonDecodeResponse($address);
+
+            if(array_key_exists('errors', $address)) {
+                throw new InvalidZipCodeException();
+            }
+
             $data['state'] = $address['state'];
             $data['city'] = $address['city'];
             $data['neighborhood'] = $address['neighborhood'];
