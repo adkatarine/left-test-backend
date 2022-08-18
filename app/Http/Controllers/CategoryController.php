@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\CategoryService;
 use App\Http\Requests\CategoryRequest;
+use Illuminate\Support\Facades\Cache;
 
 class CategoryController extends Controller
 {
@@ -19,7 +20,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = $this->category->findAll();
+        $category = Cache::remember('category', 43200, function () {
+            return $this->category->findAll();
+        });
+
         return response()->json($category, 200);
     }
 
