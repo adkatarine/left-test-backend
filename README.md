@@ -7,57 +7,58 @@ Teste técnico da Left de um sistema contendo as tabelas Categoria, Produto, Cli
 
 ## Rotas Category
 
-| Método HTTP  | Endpoint                | Descrição                                |
-| ------------ | ----------------------- | ---------------------------------------- |
-| GET          | `/category`             | Retorna todos as categorias cadastradas  |
-| GET          | `/category/{id}`        | Retorna uma categoria por Id             |
-| POST         | `/category`             | Cadastra uma nova categoria              |
-| PUT          | `/category{id}`         | Altera informações de uma categoria      |
-| DELETE       | `/category{id}`         | Deleta uma categoria especifica          |
+| Método HTTP  | Endpoint                    | Descrição                                |
+| ------------ | --------------------------- | ---------------------------------------- |
+| GET          | `/api/category`             | Retorna todos as categorias cadastradas  |
+| GET          | `/api/category/{id}`        | Retorna uma categoria por Id             |
+| POST         | `/api/category`             | Cadastra uma nova categoria              |
+| PUT          | `/api/category{id}`         | Altera informações de uma categoria      |
+| DELETE       | `/api/category{id}`         | Deleta uma categoria especifica          |
 
 
 ## Rotas Product
 
-| Método HTTP  | Endpoint                | Descrição                              |
-| ------------ | ----------------------- | -------------------------------------- |
-| GET          | `/product`              | Retorna todos os produtos cadastrados  |
-| GET          | `/product/{id}`         | Retorna um produto por Id              |
-| POST         | `/product`              | Cadastra um novo produto               |
-| POST          | `/product{id}`          | Altera informações de um produto       |
-| DELETE       | `/product{id}`          | Deleta um produto especifico           |
+| Método HTTP   | Endpoint                    | Descrição                              |
+| ------------- | --------------------------- | -------------------------------------- |
+| GET           | `/api/product`              | Retorna todos os produtos cadastrados  |
+| GET           | `/api/product/{id}`         | Retorna um produto por Id              |
+| GET           | `/api/storage/{path-image}` | Rota para visualizar imagem cadastrada |
+| POST          | `/api/product`              | Cadastra um novo produto               |
+| POST          | `/api/product{id}`          | Altera informações de um produto       |
+| DELETE        | `/api/product{id}`          | Deleta um produto especifico           |
 
 
 ## Rotas Client
 
-| Método HTTP  | Endpoint               | Descrição                                |
-| ------------ | ---------------------- | ---------------------------------------- |
-| GET          | `/client`              | Retorna todos os clientes cadastrados     |
-| GET          | `/client/{id}`         | Retorna um cliente por Id                 |
-| POST         | `/client`              | Cadastra um novo cliente                  |
-| PUT          | `/client{id}`          | Altera informações de um cliente          |
-| DELETE       | `/client{id}`          | Deleta um cliente especifico              |
+| Método HTTP  | Endpoint                   | Descrição                                |
+| ------------ | -------------------------- | ---------------------------------------- |
+| GET          | `/api/client`              | Retorna todos os clientes cadastrados     |
+| GET          | `/api/client/{id}`         | Retorna um cliente por Id                 |
+| POST         | `/api/client`              | Cadastra um novo cliente                  |
+| PUT          | `/api/client{id}`          | Altera informações de um cliente          |
+| DELETE       | `/api/client{id}`          | Deleta um cliente especifico              |
 
 
 ## Rotas Address
 
-| Método HTTP  | Endpoint                | Descrição                                            |
-| ------------ | ----------------------- | ---------------------------------------------------- |
-| GET          | `/address`              | Retorna todos os enedereços de clientes cadastrados  |
-| GET          | `/address/{id}`         | Retorna um endereço por Id                           |
-| POST         | `/address`              | Cadastra um novo enedereço                           |
-| PUT          | `/address{id}`          | Altera informações de um enedereço                   |
-| DELETE       | `/address{id}`          | Deleta um enedereço especifico                       |
+| Método HTTP  | Endpoint                    | Descrição                                            |
+| ------------ | --------------------------- | ---------------------------------------------------- |
+| GET          | `/api/address`              | Retorna todos os enedereços de clientes cadastrados  |
+| GET          | `/api/address/{id}`         | Retorna um endereço por Id                           |
+| POST         | `/api/address`              | Cadastra um novo enedereço                           |
+| PUT          | `/api/address{id}`          | Altera informações de um enedereço                   |
+| DELETE       | `/api/address{id}`          | Deleta um enedereço especifico                       |
 
 
 ## Rotas Client Order
 
-| Método HTTP  | Endpoint                     | Descrição                                           |
-| ------------ | ---------------------------- | ----------------------------------------------------|
-| GET          | `/client-order`              | Retorna todos os pedidos de produtos dos clientes   |
-| GET          | `/client-order/{id}`         | Retorna um pedido por Id                            |
-| POST         | `/client-order`              | Cadastra um novo pedido                             |
-| PUT          | `/client-order{id}`          | Altera informações de um pedido                     |
-| DELETE       | `/client-order{id}`          | Deleta um pedido especifico                         |
+| Método HTTP  | Endpoint                         | Descrição                                           |
+| ------------ | -------------------------------- | ----------------------------------------------------|
+| GET          | `/api/client-order`              | Retorna todos os pedidos de produtos dos clientes   |
+| GET          | `/api/client-order/{id}`         | Retorna um pedido por Id                            |
+| POST         | `/api/client-order`              | Cadastra um novo pedido                             |
+| PUT          | `/api/client-order{id}`          | Altera informações de um pedido                     |
+| DELETE       | `/api/client-order{id}`          | Deleta um pedido especifico                         |
 
 
 ## Dados do body request em formato JSON - Category
@@ -190,7 +191,12 @@ $ php artisan db:seed
 # Execute a aplicação para acessar a API
 $ php artisan serve
 
-# Escolha um cliente da sua preferência para testar a API e configure as rotas ou importe o arquivo insomnia-routes.json no Insominia. Caso deseje configurar as rotas, adicione no Headers de cada rota POST/PUT um header Accept com value application/json
+# Escolha um cliente da sua preferência para testar a API e configure as rotas ou importe o arquivo
+insomnia-routes.json no Insominia. Caso deseje configurar as rotas, adicione no Headers de cada rota
+POST/PUT um header Accept com value application/json
+
+# Para que seja possível visualizar a imagem cadastrada é so utilizar a rota especificada anteriormente,
+por exemplo: http://127.0.0.1:8000/storage/images\/XqJDTZNjBZHXPDVTiVwADGL3YVYMlAUwtbCoStka.jpg
 ```
 
 # Decisões de projeto
