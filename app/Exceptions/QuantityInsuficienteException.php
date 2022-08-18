@@ -8,6 +8,12 @@ use Exception;
 class QuantityInsuficienteException extends Exception
 {
 
+    /**
+     * Render the exception as an HTTP response.
+     *
+     * @param \Illuminate\Http\Response $response
+     * @return \Illuminate\Http\JsonResponse $jsonResponse
+     */
     public function render() {
         return new JsonResponse([
             'errors' => [

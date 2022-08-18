@@ -7,6 +7,12 @@ use Exception;
 
 class InvalidZipCodeException extends Exception
 {
+    /**
+     * Render the exception as an HTTP response.
+     *
+     * @param \Illuminate\Http\Response $response
+     * @return \Illuminate\Http\JsonResponse $jsonResponse
+     */
     public function render($request) {
         return new JsonResponse([
             'errors' => [
