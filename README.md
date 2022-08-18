@@ -1,64 +1,214 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Teste Backend - Left
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Descrição
+Teste técnico da Left de um sistema contendo as tabelas Categoria, Produto, Cliente e Endereço do cliente e seus respectivos CRUD's.
 
-## About Laravel
+# Rotas
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Rotas Category
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Método HTTP  | Endpoint                | Descrição                                |
+| ------------ | ----------------------- | ---------------------------------------- |
+| GET          | `/category`             | Retorna todos as categorias cadastradas  |
+| GET          | `/category/{id}`        | Retorna uma categoria por Id             |
+| POST         | `/category`             | Cadastra uma nova categoria              |
+| PUT          | `/category{id}`         | Altera informações de uma categoria      |
+| DELETE       | `/category{id}`         | Deleta uma categoria especifica          |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Rotas Product
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Método HTTP  | Endpoint                | Descrição                              |
+| ------------ | ----------------------- | -------------------------------------- |
+| GET          | `/product`              | Retorna todos os produtos cadastrados  |
+| GET          | `/product/{id}`         | Retorna um produto por Id              |
+| POST         | `/product`              | Cadastra um novo produto               |
+| POST          | `/product{id}`          | Altera informações de um produto       |
+| DELETE       | `/product{id}`          | Deleta um produto especifico           |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+## Rotas Client
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+| Método HTTP  | Endpoint               | Descrição                                |
+| ------------ | ---------------------- | ---------------------------------------- |
+| GET          | `/client`              | Retorna todos os clientes cadastrados     |
+| GET          | `/client/{id}`         | Retorna um cliente por Id                 |
+| POST         | `/client`              | Cadastra um novo cliente                  |
+| PUT          | `/client{id}`          | Altera informações de um cliente          |
+| DELETE       | `/client{id}`          | Deleta um cliente especifico              |
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Rotas Address
 
-## Contributing
+| Método HTTP  | Endpoint                | Descrição                                            |
+| ------------ | ----------------------- | ---------------------------------------------------- |
+| GET          | `/address`              | Retorna todos os enedereços de clientes cadastrados  |
+| GET          | `/address/{id}`         | Retorna um endereço por Id                           |
+| POST         | `/address`              | Cadastra um novo enedereço                           |
+| PUT          | `/address{id}`          | Altera informações de um enedereço                   |
+| DELETE       | `/address{id}`          | Deleta um enedereço especifico                       |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+## Rotas Client Order
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Método HTTP  | Endpoint                     | Descrição                                           |
+| ------------ | ---------------------------- | ----------------------------------------------------|
+| GET          | `/client-order`              | Retorna todos os pedidos de produtos dos clientes   |
+| GET          | `/client-order/{id}`         | Retorna um pedido por Id                            |
+| POST         | `/client-order`              | Cadastra um novo pedido                             |
+| PUT          | `/client-order{id}`          | Altera informações de um pedido                     |
+| DELETE       | `/client-order{id}`          | Deleta um pedido especifico                         |
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Dados do body request em formato JSON - Category
 
-## License
+```
+🔃 POST/PUT
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+{
+	"name": "Categoria 1"
+}
+```
+
+## Dados do body request em formato Multipart Form - Product
+
+```
+🔃 POST
+
+{
+	"name": "Product 1",
+	"description": "Description 1",
+	"category_id": 1,
+	"quantity_stock": 10,
+	"price": 5,
+    "image": image.jpg
+}
+
+🔃 POST para atualizar um product
+
+{
+	"name": "Product 1",
+	"description": "Description 1",
+	"category_id": 1,
+	"quantity_stock": 10,
+	"price": 5,
+    "image": image.jpg,
+    "_method": "PUT"
+}
+```
+
+
+## Dados do body request formato JSON - Client
+
+```
+🔃 POST
+
+{
+	"name": "Iva Heaney",
+	"email": "bernadette13@example.com",
+	"phone_number": "072326781",
+	"date_birth": "1971-07-31",
+	"cpf": "00000000000",
+	"cnpj": "00000000000000",
+	"addresses": [
+	{
+			"cep": "00000000",
+			"number": "10",
+			"complement": ""
+	},
+	{
+			"cep": "00000001",
+			"number": "28",
+			"complement": ""
+	}]
+}
+
+🔃 PUT
+
+{
+	"name": "Iva Heaney",
+	"email": "bernadette13@example.com",
+	"phone_number": "072326781",
+	"date_birth": "1990-06-30",
+	"cpf": "00000000000",
+	"cnpj": "00000000000000"
+}
+```
+
+
+## Dados do body request em formato JSON - Address
+
+```
+🔃 POST/PUT
+
+{
+	"client_id": 2,
+	"cep": "00000001",
+	"number": "14",
+	"complement": ""
+}
+```
+
+
+## Dados do body request em formato JSON - Client Order
+
+```
+🔃 POST/PUT
+
+{
+	"client_id": 10,
+	"product_id": 10,
+	"quantity": 5
+}
+```
+
+# Como executar o projeto em sua máquina
+
+```
+# Clone este repositório
+$ git clone https://github.com/adkatarine/left-test-backend.git
+
+# Acesse a pasta do projeto no terminal ou cmd ou editor de sua preferência
+
+# Instale as dependências na raiz do projeto
+$ composer install
+
+# Configure as variáveis de ambiente do banco de dados no arquivo .env
+
+# Crie uma nova chave para a aplicação
+$ php artisan key:generate
+
+# Execute este comando para criar todas as migrações
+$ php artisan migrate
+
+# Execute este comando para criar um link simbólico para o disco public
+$ php artisan storage:link
+
+# Execute este comando para popular as tabelas usando o Seeder
+$ php artisan db:seed
+
+# Execute a aplicação para acessar a API
+$ php artisan serve
+
+# Escolha um cliente da sua preferência para testar a API e configure as rotas ou importe o arquivo insomnia-routes.json no Insominia. Caso deseje configurar as rotas, adicione no Headers de cada rota POST/PUT um header Accept com value application/json
+```
+
+# Decisões de projeto
+
+## Tabelas
+A tabela Client Order foi adiciona para simular uma "compra" de algum produto pelo cliente e assim obtendo interação entre as tabelas.
+
+## API de requisição do endereço
+A classe estática responsável pelos dados e requisição da API BrasilAPI implementa a interface BrasilAPI para minimizar grandes mudanças em outras partes do código caso seja necessário trocar de API.
+
+## Service Container
+Este recurso foi utilizado, junto com os repositories, afim de remover as regras de negócios dos controllers e utilizar a injeção de dependência.
+
+# Construído com
+
+* [Laravel](https://laravel.com) - Framework na versão 9.x para criar a API
+* [MySQL](https://www.mysql.com) - Database
+* [Service Container](https://laravel.com/docs/master/container) - Ferramenta do Laravel para realizar injeção de dependência
+* [validator-docs](https://github.com/geekcom/validator-docs) - Biblioteca PHP para validação de documentos do Brasil usando Laravel
+* [Brasil API](https://brasilapi.com.br/docs) - API para consulta dos endereços utilizando a versão 2 do serviço de busca por CEP
+* [Insomnia](https://insomnia.rest) - Cliente para testar a API
